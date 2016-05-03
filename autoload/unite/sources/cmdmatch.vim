@@ -43,6 +43,11 @@ endf
 fu! s:unite_source.gather_candidates(args, context)
     let arg = get(a:args, 0, '')
 
+    let i = strridx(arg, ' ')
+    let s:prefix = strpart(arg, 0, i)
+    let sufix = strpart(arg, i+1)
+    let c = strpart(sufix, 0, 1)
+
     let clist = s:GetCommandCompletion(arg)
     retu map(clist, '{ "word": v:val,  "kind": ["common", "command"], "action__command": v:val  }')
 endf
